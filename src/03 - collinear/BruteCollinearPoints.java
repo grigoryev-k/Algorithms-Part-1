@@ -1,3 +1,4 @@
+package collinear;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -57,12 +58,18 @@ public class BruteCollinearPoints {
 
 	}
 
-	public static int comb(int n, int k) {
-		if (k == 0 || k == n)
-			return 1;
-		return ((n - k + 1) / k) * comb(n, k - 1);
+	public static long comb(int n, int k) {
+	    return fact(n) / (fact(k) * fact(n - k));
 	}
 
+	public static long fact(long n) {
+	    if (n == 1) {
+	        return 1;
+        }
+        else {
+	        return n * fact(n - 1);
+        }
+    }
 	public static void main(String[] args) {
 		choose(7, 3);
 	}
