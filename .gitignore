@@ -1,4 +1,8 @@
 /bin
 /lib
+/.idea
 .classpath
 .project
+.idea/
+Algoritms-Part-1.iml
+res/02 - queues/
