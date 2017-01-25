@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Board {
     private Board goal;
     private int[][] board;
@@ -33,22 +31,23 @@ public class Board {
 
     public int manhattan() {
 	int num = 0;
-//	int[] m = new int[dim * dim - 1];
+	// int[] m = new int[dim * dim - 1];
 	for (int i = 0; i < dim; i++) {
 	    for (int j = 0; j < dim; j++) {
 		int cur = board[i][j];
-		if (cur == 0) continue;
+		if (cur == 0)
+		    continue;
 		int row = (cur - 1) / dim;
 		int col = (cur - 1) - (row * dim);
 		int tmp = Math.abs(row - i) + Math.abs(col - j);
-//		m[cur - 1] = tmp;
+		// m[cur - 1] = tmp;
 		num += tmp;
 	    }
 	}
-//	for (int i : m) {
-//	    System.out.print(i + " ");
-//	}
-//	System.out.println();
+	// for (int i : m) {
+	// System.out.print(i + " ");
+	// }
+	// System.out.println();
 	return num;
 	// sum of Manhattan distances between blocks and goal
 
@@ -76,13 +75,17 @@ public class Board {
     }
 
     public String toString() {
+	long maxDigits = Math.round(Math.log10(dim * dim));
 	StringBuilder sb = new StringBuilder();
 	sb.append(dim + System.getProperty("line.separator"));
 	for (int[] row : board) {
-	    sb.append(Arrays.toString(row));
+	    // sb.append(Arrays.toString(row));
+	    for (int block : row) {
+		sb.append(String.format("%" + maxDigits + "d ", block));
+	    }
 	    sb.append(System.getProperty("line.separator"));
 	}
-	
+
 	return new String(sb);
 	// string representation of this board (in the output format specified
 	// below)
@@ -95,6 +98,6 @@ public class Board {
 	System.out.println(b.hamming());
 	System.out.println(b.manhattan());
 	System.out.println(b.toString());
-//	b.getGoalBoard(b.dimension()).toString();
+	// b.getGoalBoard(b.dimension()).toString();
     }
 }
