@@ -3,6 +3,7 @@ public class Board {
     private int[][] board;
     private int moves;
     private int dim;
+
     public Board(int[][] blocks) {
 	// construct a board from an n-by-n array of blocks
 	assert blocks[0].length == blocks.length;
@@ -22,22 +23,39 @@ public class Board {
 	for (int i = 1; i < (dim * dim); i++) {
 	    int row = (i - 1) / dim;
 	    int col = (i - 1) - (row * dim);
-	    if (i != board[row][col]) ++num;
+	    if (i != board[row][col])
+		++num;
 	}
 	return num + moves;
     }
 
     public int manhattan() {
-	
-	return dim;
+	int num = 0;
+//	int[] m = new int[dim * dim - 1];
+	for (int i = 0; i < dim; i++) {
+	    for (int j = 0; j < dim; j++) {
+		int cur = board[i][j];
+		if (cur == 0) continue;
+		int row = (cur - 1) / dim;
+		int col = (cur - 1) - (row * dim);
+		int tmp = Math.abs(row - i) + Math.abs(col - j);
+//		m[cur - 1] = tmp;
+		num += tmp;
+	    }
+	}
+//	for (int i : m) {
+//	    System.out.print(i + " ");
+//	}
+//	System.out.println();
+	return num;
 	// sum of Manhattan distances between blocks and goal
-	
+
     }
 
     public boolean isGoal() {
 	return false;
 	// is this board the goal board?
-	
+
     }
 
     public Board twin() {
@@ -57,17 +75,15 @@ public class Board {
 
     public String toString() {
 	return null;
-	// string representation of this board (in the output format specified below)
+	// string representation of this board (in the output format specified
+	// below)
     }
 
     public static void main(String[] args) {
 	// unit tests (not graded)
-	int[][] blocks = new int[][] {
-	    {8, 1, 3},
-	    {4, 0, 2},
-	    {7, 6, 5}
-	};
+	int[][] blocks = new int[][] { { 8, 1, 3 }, { 4, 0, 2 }, { 7, 6, 5 } };
 	Board b = new Board(blocks);
 	System.out.println(b.hamming());
+	System.out.println(b.manhattan());
     }
 }
