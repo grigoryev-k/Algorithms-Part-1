@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Board {
     private Board goal;
     private int[][] board;
@@ -74,7 +76,14 @@ public class Board {
     }
 
     public String toString() {
-	return null;
+	StringBuilder sb = new StringBuilder();
+	sb.append(dim + System.getProperty("line.separator"));
+	for (int[] row : board) {
+	    sb.append(Arrays.toString(row));
+	    sb.append(System.getProperty("line.separator"));
+	}
+	
+	return new String(sb);
 	// string representation of this board (in the output format specified
 	// below)
     }
@@ -85,5 +94,7 @@ public class Board {
 	Board b = new Board(blocks);
 	System.out.println(b.hamming());
 	System.out.println(b.manhattan());
+	System.out.println(b.toString());
+//	b.getGoalBoard(b.dimension()).toString();
     }
 }
